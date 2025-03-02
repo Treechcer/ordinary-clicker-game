@@ -1,0 +1,118 @@
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #e66465, #9198e5);
+}
+
+.middle {
+    border-radius: 15px;
+    background-color: rgb(250, 250, 250);
+    width: 90%;
+    max-width: 800px;
+    min-width: 400px;
+    box-shadow: 7.5px 5px 3px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    height: 200px;
+}
+
+#diviš{
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px; 
+}
+
+.levo, .pravo {
+    min-width: 64%;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 7px;
+}
+
+.levo {
+    background-color: lightgray;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.pravo {
+    background-color: rgb(173, 216, 230);
+    padding: 10px;
+    flex-direction: column;
+}
+
+.upgs{
+    border-radius: 8px;
+    background-color: rgb(97, 200, 235);
+    width: 55%;
+    overflow: hidden;
+    padding: 5px;
+    text-align: center;
+    margin-bottom: 5px;
+    margin-top: 5px;
+}
+
+.upgButton{
+    border: none;
+}
+
+.upgButton:active{
+    background-color: rgb(26, 180, 231) !important;
+}
+
+.upgButton:hover{
+    background-color: rgb(139, 204, 226);
+}
+
+button{
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+}
+
+.stred{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#stul{
+    overflow: auto;
+    width: 90%;
+    margin-bottom: 10px;
+    align-items: center;
+    justify-content: center;
+    overflow-y: auto;
+    height: 200px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #4d4747;
+    padding: 8px;
+    text-align: center;
+}
+
+
+th {
+    background-color: #ece7e7;
+}
