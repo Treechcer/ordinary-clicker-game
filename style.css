@@ -11,7 +11,7 @@ body {
 .middle {
     border-radius: 15px;
     background-color: rgb(250, 250, 250);
-    width: 80%;
+    width: 90%;
     max-width: 800px;
     min-width: 400px;
     box-shadow: 7.5px 5px 3px rgba(0, 0, 0, 0.2);
@@ -34,7 +34,7 @@ body {
 }
 
 .levo, .pravo {
-    min-width: 64%;
+    min-width: 68%;
     flex: 1;
     display: flex;
     justify-content: center;

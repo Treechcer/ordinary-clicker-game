@@ -152,5 +152,5 @@ function clickCountS(){
     }
 }
 
-setInterval(() => moneyPerSec(), 100);
-setInterval(() => clickCountS(), 1000)
+setInterval(moneyPerSec, 100);
+setInterval(clickCountS, 1000)
