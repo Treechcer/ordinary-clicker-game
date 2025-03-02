@@ -1,7 +1,9 @@
 var gameData = {
     perClick: 1,
     perSec: 0,
-    money: 0
+    money: 0,
+    clickCount: 0,
+    lastClickCount:  0,
 }
 
 var upgrades = {
@@ -19,7 +21,7 @@ var upgrades = {
         ammount: 0,
         costScaling: 10,
         perSecBoost: 1,
-        upgScale: 0.09
+        upgScale: 0.09,
     },    
     upgrade2: {
         isClickType: false,
@@ -27,12 +29,16 @@ var upgrades = {
         ammount: 0,
         costScaling: 8,
         perSecBoost: 3,
-        upgScale: 0.08
+        upgScale: 0.08,
     }
 }
 
 achievements = {
     bigBuyer: false,
+    rich: false,
+    clicker: false,
+    autoclicker: false,
+    secret: false,
 }
 
 function drawAll(){
@@ -51,6 +57,7 @@ function drawAll(){
 
 function clickMoneyAdder(){
     gameData.money += gameData.perClick;
+    gameData.clickCount++;
     drawAll();
 }
 
@@ -90,12 +97,60 @@ function upgradeBuy(numOfUpg){
     }
 }
 
+function countAFKmoney(){
+    gameData.perSec = (upgrades.upgrade1.ammount * upgrades.upgrade1.perSecBoost + upgrades.upgrade2.ammount * upgrades.upgrade2.perSecBoost)
+}
+
+function countClickMoney(){
+    gameData.perClick = (upgrades.upgrade0.ammount * upgrades.upgrade0.boostClick) + 1
+}
+
 function achievementControl(){
-    if (!achievements.bigBuyer && upgrades.upgrade1.ammount >= 1){
+    if (!achievements.bigBuyer && upgrades.upgrade1.ammount >= 1 && upgrades.upgrade1.cost != 10){
         achievements.bigBuyer = true;
         gameData.money += 15;
         drawAll();
     }
+
+    if (!achievements.rich && gameData.money >= 100){
+        achievements.rich = true;
+        upgrades.upgrade0.ammount += 3;
+        countClickMoney();
+        drawAll();
+    }
+
+    if (!achievements.clicker && gameData.clickCount >= 100){
+        achievements.clicker = true;
+        upgrades.upgrade1.ammount += 1;
+        countAFKmoney();
+        drawAll();
+    }
+
+    if (!achievements.secret && upgrades.upgrade0.ammount >= 10 && upgrades.upgrade1.ammount >= 10 && upgrades.upgrade2.ammount >= 10){
+        achievements.secret = true;
+        gameData.money += 100;
+        upgrades.upgrade1.perSecBoost++;
+        upgrades.upgrade2.perSecBoost += 2;
+        countAFKmoney();
+        drawAll();
+    }
+}
+
+function clickCountS(){
+    if (gameData.lastClickCount == 0){
+        gameData.lastClickCount = gameData.clickCount;
+    }
+
+    if (gameData.clickCount - gameData.lastClickCount >= 8 && !achievements.autoclicker){
+        achievements.autoclicker = true;
+        upgrades.upgrade2.ammount += 3;
+        countAFKmoney();
+        drawAll();
+    }
+    else{
+        gameData.lastClickCount = gameData.clickCount;
+    }
 }
 
 setInterval(() => moneyPerSec(), 100);
+setInterval(() => clickCountS(), 1000)
