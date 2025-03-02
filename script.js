@@ -31,6 +31,10 @@ var upgrades = {
     }
 }
 
+achievements = {
+    bigBuyer: false,
+}
+
 function drawAll(){
     document.getElementById("money").textContent = parseInt(gameData.money);
     document.getElementById("perSec").textContent = parseInt(gameData.perSec);
@@ -38,6 +42,11 @@ function drawAll(){
     document.getElementById("upgrade0").textContent = "clickUpg: " + parseInt(upgrades.upgrade0.cost) + " owned " + upgrades.upgrade0.ammount;
     document.getElementById("upgrade1").textContent = "upgrade 1: " + parseInt(upgrades.upgrade1.cost) + " owned " + upgrades.upgrade1.ammount;
     document.getElementById("upgrade2").textContent = "upgrade 2: " + parseInt(upgrades.upgrade2.cost) + " owned " + upgrades.upgrade2.ammount;
+    for (key in achievements){
+        if (achievements[key]){
+            document.getElementById(key).textContent = achievements[key];
+        }
+    }
 }
 
 function clickMoneyAdder(){
@@ -48,6 +57,7 @@ function clickMoneyAdder(){
 function moneyPerSec(){
     gameData.money += gameData.perSec / 10;
     drawAll();
+    achievementControl();
 }
 
 function upgradeBuy(numOfUpg){
@@ -76,6 +86,14 @@ function upgradeBuy(numOfUpg){
         upgrade.cost += upgrade.cost / upgrade.costScaling;
         upgrade.costScaling -= upgrade.upgScale
         upgrade.upgScale += (upgrade.upgScale / 100)
+        drawAll();
+    }
+}
+
+function achievementControl(){
+    if (!achievements.bigBuyer && upgrades.upgrade1.ammount >= 1){
+        achievements.bigBuyer = true;
+        gameData.money += 15;
         drawAll();
     }
 }
